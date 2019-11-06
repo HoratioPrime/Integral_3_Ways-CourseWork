@@ -1,0 +1,19 @@
+QGroupBox::title
+{
+    color: #9b9b9b;
+}
+
+QGroupBox{
+    border:none;
+}
+
+QRadioButton
+{
+    color: #ebebeb;
+}
+
+QGraphicsView
+{
+    background:transparent;
+    border:none;
+}
