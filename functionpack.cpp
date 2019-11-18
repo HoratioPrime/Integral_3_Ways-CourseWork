@@ -32,4 +32,8 @@ Function FunctionPack::getCurrentFunc()
     return functions[currentFuncIdx];
 }
 
+Function FunctionPack::getFuncByIdx(int idx) const
+{
+    return functions[idx];
+}
 

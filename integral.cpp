@@ -1,98 +1,51 @@
 
 #include "integral.h"
+#include <iostream>
 
-
-QGraphicsScene*     Integral::scene;
-int                 Integral::currentIdx = -1;
-int                 Integral::cx;
-int                 Integral::cy;
+//QGraphicsScene*     Integral::scene;
 QPen                Integral::pen;
+
+//qchart
+//QChart*          Integral::chart;
+//QChartView*      Integral::chartView;
+//QValueAxis*      Integral::axisX;
+//QValueAxis*      Integral::axisY;
+
+int                 Integral::currentIdx = -1;
+//int                 Integral::cx;
+//int                 Integral::cy;
+
 
 Integral::Integral()
 {
-    currentIdx++;
-
+    series = new QLineSeries();
+    series->setColor(QColor().fromRgb(235,235,235));
+    backSeries = new QLineSeries();
 }
+
 
 double Integral::execute()
 {
 
-
-    //executed = true;
-    Integral::scene->clear();
-    //Integral::scene->addLine(0, sin(i),
-      //                       0, sin(i), QPen(QColor().fromRgb(155,155,155)));
-
-
-
-
     int i; // счётчик
-    double n; // задаём число разбиений n
+    //double n; // задаём число разбиений n
     n = (b - a) / h;
     double x0 = a;
 
-    double kx = 0.;
-    double ky = 0.;
-
-    if(a < 0 && b <= 0 && abs(a) < cx/4 && abs(a) > cx/2)
-    {
-        kx = abs((cx*3/8)/a);
-    }else if(a >= 0 && b > 0 && abs(b) < cx/4 && abs(b) > cx/2)
-    {
-        kx = (cx*3/8)/b;
-    }else{
-        if(abs(a) > b)
-        {
-            kx = abs((cx*3/8)/a);
-        }else
-        {
-            kx = kx = (cx*3/8)/b;
-        }
-    }
-
-    int k = 50; // увеличение графика
+    //int k = 50; // увеличение графика
     double x = 0.;
     double fRes = 0.;
 
 
     switch(currentMethod){
     case METHOD::AVERAGE:
-       /* while(j < cx*2)
+
+        for (i = 1; i <= n; i++)
         {
-            if( (j >= a+cx) && (j <= b+cx) )
-            {
-                j+= b - a + h;*/
-                for (i = 1; i <= n; i++)
-                {
-                    x = a + h * (i - 0.5);
-                    fRes = c * func(d*x);
-                    res +=  h * fRes;
-                    if(-k*fRes+cy > 0 && -k*fRes+cy < cy*2)
-                    {
-
-                        pen.setColor(QColor().fromRgb(41,98,255));
-                        Integral::scene->addLine(kx*x+cx, cy,
-                                                kx*x+cx, -k*(fRes)+cy, pen);
-                        pen.setColor(QColor().fromRgb(255,255,255));
-                        Integral::scene->addLine(kx*x+cx, -k*fRes+cy,
-                                                kx*x+cx, -k*fRes+cy, pen);
-
-                    }
-
-                }
-           /*     prevPY = -k*fRes;
-                pen.setColor(QColor().fromRgb(255,255,255));
-            }
-            x = j-cx;
+            x = a + h * (i - 0.5);
             fRes = c * func(d*x);
-            if(-k*fRes+cy > 0 && -k*fRes+cy < cy*2 && prevPY + cy > 0 && prevPY + cy < cy*2 && j != 0.)
-            {
-                Integral::scene->addLine(k*(x-h)+cx, prevPY+cy,
-                                        k*x+cx, -k*fRes+cy, pen);
-            }
-            prevPY = -k*fRes;
-            j+= h;
-        }*/
+            res +=  h * fRes;
+        }
         break;
 
     case METHOD::SIMPSON:
@@ -119,24 +72,7 @@ double Integral::execute()
         res *= c*h/288.;
         break;
     }
-
-    double j = 0;
-    double prevPY = 0.;
-    pen.setColor(QColor().fromRgb(255,255,255));
-    while(j < cx*2)
-    {
-         prevPY = -k*fRes;
-         x = j-cx;
-         fRes = c * func(d*x);
-         if(-k*fRes+cy > 0 && -k*fRes+cy < cy*2 && prevPY + cy > 0 && prevPY + cy < cy*2 && j != 0.)
-         {
-             Integral::scene->addLine(kx*(x-h)+cx, prevPY+cy,
-                                     kx*x+cx, -k*fRes+cy, pen);
-         }
-         prevPY = -k*fRes;
-         j+= h;
-    }
-
+    //constructSeries();
     return res;
 }
 
@@ -160,6 +96,12 @@ void Integral::setStep(double step)
     h = step;
 }
 
+void Integral::attachAxis(QValueAxis *axisX, QValueAxis *axisY)
+{
+    series->attachAxis(axisX);
+    series->attachAxis(axisY);
+}
+
 void Integral::setParameters( double a, double b, double c, double d)
 {
     this->a = a;
@@ -171,4 +113,22 @@ void Integral::setParameters( double a, double b, double c, double d)
 double Integral::getRes() const
 {
     return res;
+}
+
+void Integral::constructSeries()
+{
+    series = new QLineSeries();
+    series->setColor(QColor().fromRgb(235,235,235));
+    double indent = (b - a)/2.;
+    double j = a - indent;
+    double fRes = 0.;
+    double x = 0.;
+    while(j < b + indent)
+    {
+        x = j;
+        fRes = c * func(d*x);
+        series->append(x, fRes);
+        j+= h;
+    }
+    return;
 }

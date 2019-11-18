@@ -115,6 +115,14 @@ QSlider::handle:vertical:hover {
   background: #148CD2;
   border: 1px solid #148CD2;
 }
+
+
+QMainWindow{
+border-radius: 20px;
+}
+
+
+
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -122,9 +130,9 @@ QSlider::handle:vertical:hover {
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>390</y>
+      <y>380</y>
       <width>361</width>
-      <height>131</height>
+      <height>151</height>
      </rect>
     </property>
     <property name="font">
@@ -133,13 +141,13 @@ QSlider::handle:vertical:hover {
      </font>
     </property>
     <property name="title">
-     <string>Выберите метод:</string>
+     <string/>
     </property>
     <widget class="QRadioButton" name="newton_cotesButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>95</y>
+       <x>27</x>
+       <y>97</y>
        <width>250</width>
        <height>31</height>
       </rect>
@@ -152,11 +160,11 @@ QSlider::handle:vertical:hover {
      <property name="styleSheet">
       <string notr="true">QRadioButton::indicator::unchecked
 {
-   image: url(/Users/Horatio/source/Integral_3_ways-CourseWork1/img/circle.png);
+   image: url(/Users/Horatio/source/Integral_3_ways-CourseWork/img/UI/circle.png);
 }
 QRadioButton::indicator::checked 
 {
-    image: url(/Users/Horatio/source/Integral_3_ways-CourseWork1/img/checked.png);
+    image: url(/Users/Horatio/source/Integral_3_ways-CourseWork/img/UI/checked.png);
 }</string>
      </property>
      <property name="text">
@@ -166,8 +174,8 @@ QRadioButton::indicator::checked
     <widget class="QRadioButton" name="averageButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>33</y>
+       <x>27</x>
+       <y>35</y>
        <width>250</width>
        <height>31</height>
       </rect>
@@ -180,11 +188,11 @@ QRadioButton::indicator::checked
      <property name="styleSheet">
       <string notr="true">QRadioButton::indicator::unchecked
 {
-   image: url(/Users/Horatio/source/Integral_3_ways-CourseWork1/img/circle.png);
+   image: url(/Users/Horatio/source/Integral_3_ways-CourseWork/img/UI/circle.png);
 }
 QRadioButton::indicator::checked 
 {
-    image: url(/Users/Horatio/source/Integral_3_ways-CourseWork1/img/checked.png);
+    image: url(/Users/Horatio/source/Integral_3_ways-CourseWork/img/UI/checked.png);
 }</string>
      </property>
      <property name="text">
@@ -194,8 +202,8 @@ QRadioButton::indicator::checked
     <widget class="QRadioButton" name="simpsonButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>64</y>
+       <x>27</x>
+       <y>66</y>
        <width>250</width>
        <height>31</height>
       </rect>
@@ -208,11 +216,11 @@ QRadioButton::indicator::checked
      <property name="styleSheet">
       <string notr="true">QRadioButton::indicator::unchecked
 {
-   image: url(/Users/Horatio/source/Integral_3_ways-CourseWork1/img/circle.png);
+   image: url(/Users/Horatio/source/Integral_3_ways-CourseWork/img/UI/circle.png);
 }
 QRadioButton::indicator::checked 
 {
-    image: url(/Users/Horatio/source/Integral_3_ways-CourseWork1/img/checked.png);
+    image: url(/Users/Horatio/source/Integral_3_ways-CourseWork/img/UI/checked.png);
 }</string>
      </property>
      <property name="text">
@@ -237,7 +245,7 @@ QRadioButton::indicator::checked
      </font>
     </property>
     <property name="title">
-     <string>Выберите точность:</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -245,8 +253,8 @@ QRadioButton::indicator::checked
     <widget class="QSlider" name="horizontalSlider">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>46</y>
+       <x>30</x>
+       <y>43</y>
        <width>245</width>
        <height>22</height>
       </rect>
@@ -257,7 +265,7 @@ QRadioButton::indicator::checked
 }
 
 QSlider::groove:horizontal {
-  background: #9b9b9b;
+  background: rgb(37,37,37);
   border: 1px solid #32414B;
   height: 4px;
   margin: 0px;
@@ -293,7 +301,7 @@ QSlider::handle:horizontal:hover {
      <property name="geometry">
       <rect>
        <x>269</x>
-       <y>46</y>
+       <y>43</y>
        <width>81</width>
        <height>21</height>
       </rect>
@@ -301,14 +309,14 @@ QSlider::handle:horizontal:hover {
      <property name="font">
       <font>
        <family>Roboto</family>
-       <pointsize>14</pointsize>
+       <pointsize>13</pointsize>
        <kerning>true</kerning>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QLineEdit
 {
-	color: #9b9b9b;
+	color:  rgb(37,37,37);
 }</string>
      </property>
      <property name="alignment">
@@ -323,9 +331,9 @@ QSlider::handle:horizontal:hover {
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>10</y>
+      <y>30</y>
       <width>701</width>
-      <height>511</height>
+      <height>501</height>
      </rect>
     </property>
     <property name="title">
@@ -334,10 +342,10 @@ QSlider::handle:horizontal:hover {
     <widget class="QChartView" name="graphic">
      <property name="geometry">
       <rect>
-       <x>39</x>
-       <y>66</y>
-       <width>601</width>
-       <height>366</height>
+       <x>260</x>
+       <y>108</y>
+       <width>391</width>
+       <height>376</height>
       </rect>
      </property>
      <property name="font">
@@ -345,70 +353,58 @@ QSlider::handle:horizontal:hover {
        <family>MS Shell Dlg 2</family>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QChartView
+{
+	backgound: transparent;
+	color: #ebebeb;
+}</string>
+     </property>
     </widget>
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>513</x>
-       <y>465</y>
-       <width>151</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel
-{
-	color: #9b9b9b
-}</string>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="answer">
-     <property name="geometry">
-      <rect>
-       <x>440</x>
-       <y>470</y>
-       <width>81</width>
+       <x>90</x>
+       <y>458</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>14</pointsize>
+       <family>Roboto</family>
+       <pointsize>10</pointsize>
+       <underline>true</underline>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel
 {
-	color: #9b9b9b
+	color: #ebebeb
 }</string>
      </property>
      <property name="text">
-      <string>Ответ:</string>
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QPushButton" name="LOAD">
      <property name="geometry">
       <rect>
-       <x>307</x>
-       <y>462</y>
-       <width>90</width>
-       <height>41</height>
+       <x>551</x>
+       <y>55</y>
+       <width>93</width>
+       <height>43</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Roboto</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -416,7 +412,7 @@ QSlider::handle:horizontal:hover {
 {
 	color: #ebebeb;
 	background: #2962ff;
-	border-radius: 5px;
+	border-radius: 3px;
 }
 QPushButton:hover:!pressed
 {
@@ -430,24 +426,24 @@ QPushButton:pressed
 }</string>
      </property>
      <property name="text">
-      <string>LOAD</string>
+      <string>Load</string>
      </property>
     </widget>
     <widget class="QPushButton" name="SAVE">
      <property name="geometry">
       <rect>
-       <x>207</x>
-       <y>462</y>
-       <width>90</width>
-       <height>41</height>
+       <x>443</x>
+       <y>55</y>
+       <width>93</width>
+       <height>43</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Roboto</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -455,7 +451,7 @@ QPushButton:pressed
 {
 	color: #ebebeb;
 	background: #2962ff;
-	border-radius: 5px;
+	border-radius: 3px;
 }
 QPushButton:hover:!pressed
 {
@@ -469,22 +465,24 @@ QPushButton:pressed
 }</string>
      </property>
      <property name="text">
-      <string>SAVE</string>
+      <string>Save</string>
      </property>
     </widget>
     <widget class="QPushButton" name="right">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>462</y>
-       <width>70</width>
-       <height>41</height>
+       <x>118</x>
+       <y>55</y>
+       <width>65</width>
+       <height>43</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <weight>75</weight>
-       <bold>true</bold>
+       <family>Roboto</family>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -492,7 +490,7 @@ QPushButton:pressed
 {
 	color: #ebebeb;
 	background: #2962ff;
-	border-radius: 5px;
+	border-radius: 3px;
 }
 QPushButton:hover:!pressed
 {
@@ -503,6 +501,11 @@ QPushButton:pressed
 {
 	background: #173894;
 	
+}
+
+QPushButton:disabled
+{
+	background: #9b9b9b;
 }</string>
      </property>
      <property name="text">
@@ -512,16 +515,18 @@ QPushButton:pressed
     <widget class="QPushButton" name="left">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>462</y>
-       <width>70</width>
-       <height>41</height>
+       <x>38</x>
+       <y>55</y>
+       <width>65</width>
+       <height>43</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <weight>75</weight>
-       <bold>true</bold>
+       <family>Roboto</family>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -529,7 +534,51 @@ QPushButton:pressed
 {
 	color: #ebebeb;
 	background: #2962ff;
-	border-radius: 5px;
+	border-radius: 3px;
+}
+QPushButton:hover:!pressed
+{
+	background: #2251d2;
+	
+}
+QPushButton:pressed
+{
+	background: #173894;
+	
+}
+
+QPushButton:disabled
+{
+	background: #9b9b9b;
+}</string>
+     </property>
+     <property name="text">
+      <string>&lt;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ClearAll">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>55</y>
+       <width>120</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Roboto</family>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+	color: #ebebeb;
+	background: #2962ff;
+	border-radius: 3px;
 }
 QPushButton:hover:!pressed
 {
@@ -543,8 +592,352 @@ QPushButton:pressed
 }</string>
      </property>
      <property name="text">
-      <string>&lt;</string>
+      <string>Clear All</string>
      </property>
+    </widget>
+    <widget class="QPushButton" name="Clear">
+     <property name="geometry">
+      <rect>
+       <x>199</x>
+       <y>55</y>
+       <width>95</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Roboto</family>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+	color: #ebebeb;
+	background: #2962ff;
+	border-radius: 3px;
+}
+QPushButton:hover:!pressed
+{
+	background: #2251d2;
+	
+}
+QPushButton:pressed
+{
+	background: #173894;
+	
+}</string>
+     </property>
+     <property name="text">
+      <string>Clear</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="integralInform">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>211</width>
+       <height>371</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QGraphicsView" name="prevFunc">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>86</y>
+        <width>191</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGraphicsView{
+background-image : &quot;/Users/Horatio/source/Integral_3_ways-CourseWork/img/integral-GUI.png&quot;
+}</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="renderHints">
+       <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::LosslessImageRendering|QPainter::SmoothPixmapTransform</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="prevA">
+      <property name="geometry">
+       <rect>
+        <x>149</x>
+        <y>221</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="prevB">
+      <property name="geometry">
+       <rect>
+        <x>149</x>
+        <y>245</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="prevC">
+      <property name="geometry">
+       <rect>
+        <x>149</x>
+        <y>267</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="prevD">
+      <property name="geometry">
+       <rect>
+        <x>149</x>
+        <y>289</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="qOfIter">
+      <property name="geometry">
+       <rect>
+        <x>159</x>
+        <y>345</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="prevPrecision">
+      <property name="geometry">
+       <rect>
+        <x>149</x>
+        <y>200</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="prevMeth">
+      <property name="geometry">
+       <rect>
+        <x>81</x>
+        <y>176</y>
+        <width>121</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="currNum">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>39</y>
+        <width>16</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="sizeOfVector">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>39</y>
+        <width>20</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>39</y>
+        <width>14</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+	color: #ebebeb;
+}</string>
+      </property>
+      <property name="text">
+       <string>из</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
@@ -552,7 +945,7 @@ QPushButton:pressed
      <rect>
       <x>470</x>
       <y>520</y>
-      <width>491</width>
+      <width>501</width>
       <height>121</height>
      </rect>
     </property>
@@ -562,36 +955,15 @@ QPushButton:pressed
     <widget class="QGroupBox" name="groupBox_8">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>40</y>
-       <width>81</width>
+       <x>90</x>
+       <y>42</y>
+       <width>91</width>
        <height>61</height>
       </rect>
      </property>
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_A">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>13</y>
-        <width>41</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Roboto</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>A:</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="aLineEdit">
       <property name="geometry">
        <rect>
@@ -604,7 +976,7 @@ QPushButton:pressed
       <property name="font">
        <font>
         <family>Roboto</family>
-        <pointsize>15</pointsize>
+        <pointsize>17</pointsize>
        </font>
       </property>
       <property name="autoFillBackground">
@@ -615,8 +987,8 @@ QPushButton:pressed
     <widget class="QGroupBox" name="groupBox_5">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>40</y>
+       <x>197</x>
+       <y>42</y>
        <width>91</width>
        <height>61</height>
       </rect>
@@ -624,31 +996,10 @@ QPushButton:pressed
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_B">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>13</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Roboto</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>B:</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="bLineEdit">
       <property name="geometry">
        <rect>
-        <x>54</x>
+        <x>42</x>
         <y>14</y>
         <width>41</width>
         <height>31</height>
@@ -657,7 +1008,7 @@ QPushButton:pressed
       <property name="font">
        <font>
         <family>Roboto</family>
-        <pointsize>15</pointsize>
+        <pointsize>17</pointsize>
        </font>
       </property>
      </widget>
@@ -665,40 +1016,19 @@ QPushButton:pressed
     <widget class="QGroupBox" name="groupBox_7">
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>40</y>
-       <width>111</width>
+       <x>302</x>
+       <y>42</y>
+       <width>91</width>
        <height>61</height>
       </rect>
      </property>
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_C">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>13</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Roboto</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>C:</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="cLineEdit">
       <property name="geometry">
        <rect>
-        <x>76</x>
+        <x>42</x>
         <y>14</y>
         <width>41</width>
         <height>31</height>
@@ -707,7 +1037,7 @@ QPushButton:pressed
       <property name="font">
        <font>
         <family>Roboto</family>
-        <pointsize>15</pointsize>
+        <pointsize>17</pointsize>
        </font>
       </property>
      </widget>
@@ -715,40 +1045,19 @@ QPushButton:pressed
     <widget class="QGroupBox" name="groupBox_6">
      <property name="geometry">
       <rect>
-       <x>370</x>
-       <y>40</y>
-       <width>111</width>
+       <x>405</x>
+       <y>42</y>
+       <width>91</width>
        <height>61</height>
       </rect>
      </property>
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_D">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>13</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Roboto</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>D:</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="dLineEdit">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>42</x>
         <y>14</y>
         <width>41</width>
         <height>31</height>
@@ -757,7 +1066,7 @@ QPushButton:pressed
       <property name="font">
        <font>
         <family>Roboto</family>
-        <pointsize>15</pointsize>
+        <pointsize>17</pointsize>
        </font>
       </property>
      </widget>
@@ -766,7 +1075,7 @@ QPushButton:pressed
    <widget class="QPushButton" name="equalButton">
     <property name="geometry">
      <rect>
-      <x>980</x>
+      <x>978</x>
       <y>554</y>
       <width>171</width>
       <height>71</height>
@@ -774,7 +1083,8 @@ QPushButton:pressed
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -803,9 +1113,9 @@ QPushButton:pressed
     <property name="geometry">
      <rect>
       <x>49</x>
-      <y>220</y>
+      <y>215</y>
       <width>415</width>
-      <height>161</height>
+      <height>191</height>
      </rect>
     </property>
     <property name="title">
@@ -815,9 +1125,9 @@ QPushButton:pressed
      <property name="geometry">
       <rect>
        <x>336</x>
-       <y>40</y>
+       <y>50</y>
        <width>75</width>
-       <height>108</height>
+       <height>98</height>
       </rect>
      </property>
      <property name="font">
@@ -840,16 +1150,16 @@ QPushButton:pressed
 }</string>
      </property>
      <property name="text">
-      <string>&gt;</string>
+      <string/>
      </property>
     </widget>
     <widget class="QPushButton" name="prevFunButton">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>40</y>
+       <y>50</y>
        <width>75</width>
-       <height>108</height>
+       <height>98</height>
       </rect>
      </property>
      <property name="font">
@@ -872,15 +1182,15 @@ QPushButton:pressed
 }</string>
      </property>
      <property name="text">
-      <string>&lt;</string>
+      <string/>
      </property>
     </widget>
     <widget class="QGraphicsView" name="graphicsView">
      <property name="geometry">
       <rect>
-       <x>85</x>
+       <x>30</x>
        <y>30</y>
-       <width>241</width>
+       <width>341</width>
        <height>121</height>
       </rect>
      </property>
@@ -889,7 +1199,79 @@ QPushButton:pressed
 background-image : &quot;/Users/Horatio/source/Integral_3_ways-CourseWork/img/integral-GUI.png&quot;
 }</string>
      </property>
+     <property name="foregroundBrush">
+      <brush brushstyle="NoBrush">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+     <property name="interactive">
+      <bool>false</bool>
+     </property>
+     <property name="sceneRect">
+      <rectf>
+       <x>0.000000000000000</x>
+       <y>0.000000000000000</y>
+       <width>0.000000000000000</width>
+       <height>0.000000000000000</height>
+      </rectf>
+     </property>
+     <property name="renderHints">
+      <set>QPainter::HighQualityAntialiasing|QPainter::LosslessImageRendering|QPainter::TextAntialiasing</set>
+     </property>
+     <property name="transformationAnchor">
+      <enum>QGraphicsView::AnchorViewCenter</enum>
+     </property>
+     <property name="rubberBandSelectionMode">
+      <enum>Qt::IntersectsItemShape</enum>
+     </property>
     </widget>
+    <zorder>graphicsView</zorder>
+    <zorder>nextFunButton</zorder>
+    <zorder>prevFunButton</zorder>
+   </widget>
+   <widget class="QPushButton" name="exitButton">
+    <property name="geometry">
+     <rect>
+      <x>1133</x>
+      <y>1</y>
+      <width>66</width>
+      <height>66</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	color: #ebebeb;
+	background: #2962ff;
+	border-radius: 33px;
+	border-width: 5px;
+	border-color: #ebebeb;
+}
+QPushButton:hover:!pressed
+{
+	background: rgb(255, 51, 51);
+	border: none;
+	
+}
+QPushButton:pressed
+{
+	background: #173894;
+	
+}</string>
+    </property>
+    <property name="text">
+     <string>×</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

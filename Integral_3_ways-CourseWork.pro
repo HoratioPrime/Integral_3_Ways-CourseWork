@@ -3,7 +3,7 @@ QT       += charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
-win32:RC_ICONS += img/ico-i3.ico
+win32:RC_ICONS += img/UI/ico-i3.ico
 
 CONFIG += c++14
 
@@ -20,12 +20,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     functionpack.cpp \
+    graphic.cpp \
     integral.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     functionpack.h \
+    graphic.h \
     integral.h \
     mainwindow.h
 
@@ -94,6 +96,8 @@ DISTFILES += \
     img/integral-GUI_back.png \
     img/intro.png \
     res/PastIntegrals \
+    res/PastIntegrals.txt \
+    res/qtquickcontrols2.conf \
     sound/oxp.wav
 
 RESOURCES +=

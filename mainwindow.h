@@ -6,6 +6,7 @@
 #include <vector>
 #include "integral.h"
 #include "functionpack.h"
+#include "graphic.h"
 #include "ui_mainwindow.h"
 
 #include <QPainter>
@@ -22,7 +23,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     void setIntegralsParametersToGUI();
-    void drawAxis();
+    void setDefaultPrevGUI();
+    void drawFunc();
 
     ~MainWindow();
 
@@ -46,12 +48,27 @@ private slots:
 
     void on_right_clicked();
 
+    void on_exitButton_clicked();
+
+    void on_Clear_clicked();
+
+    void on_ClearAll_clicked();
+
+    void on_SAVE_clicked();
+
+    void on_LOAD_clicked();
+
 private:
     std::vector<Integral> integrals;
     FunctionPack fpack;
     QGraphicsScene* sceneForFunc;
+    QGraphicsScene* sceneForPrevFunc;
     QFile fileIntegrals;
+    Graphic graphic;
 
+    METHOD method;
+
+    QLabel* label;
 
     Ui::MainWindow *ui;
 };

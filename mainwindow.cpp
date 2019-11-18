@@ -1,13 +1,7 @@
 #include "mainwindow.h"
 #include <cmath>
 #include <QtMath>
-
-
-
-#include <QtCharts>
-using namespace QtCharts;
-
-
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,7 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QPixmap bkgnd("/Users/Horatio/source/Integral_3_ways-CourseWork/img/integral-GUI_back.png");
+    method = METHOD::AVERAGE;
+
+    QPixmap bkgnd("/Users/Horatio/source/Integral_3_ways-CourseWork/img/mainUI/integral-GUI_back2.png");
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
@@ -25,27 +21,38 @@ MainWindow::MainWindow(QWidget *parent)
     sceneForFunc = new QGraphicsScene();
     sceneForFunc->addPixmap(QPixmap(fpack.getCurrentFunc().getPath().c_str()));
     ui->graphicsView->setScene(sceneForFunc);
-    ui->graphicsView->scale(1.4,1.4);
+
+    //ui->tryInImage->setScaledContents(true);
 
 
-    //Initialize scene with graphic of function by basic parameters
-    Integral::scene = new QGraphicsScene(ui->graphic);
-    Integral::scene->setSceneRect(0, 0, ui->graphic->width(), ui->graphic->height());
-    ui->graphic->setScene(Integral::scene);
-    Integral::cx = Integral::scene->width()/2;
-    Integral::cy = Integral::scene->height()/2;
-    Integral::pen = QPen(QColor().fromRgb(255,255,255));
-    drawAxis();
+    ui->graphicsView->scale(2, 2);
 
-    //Prev and next button
+    sceneForPrevFunc = new QGraphicsScene();
+    //sceneForPrevFunc->setBackgroundBrush(QBrush(QColor().fromRgb(37,37,37)));
+    ui->prevFunc->setScene(sceneForPrevFunc);
+    ui->prevFunc->scale(1.4, 1.4);
+
+    //Graphic
+
+    ui->graphic->setChart(graphic.getChartView()->chart());
+    ui->graphic->setBackgroundBrush(QBrush(QColor().fromRgb(37,37,37)));
+    ui->graphic->show();
+
+    //Prev and next func buttons
+    ui->nextFunButton->setIcon(QIcon("/Users/Horatio/source/Integral_3_ways-CourseWork/img/left-right-button/Asset_right_button@3x.png"));
+    ui->prevFunButton->setIcon(QIcon("/Users/Horatio/source/Integral_3_ways-CourseWork/img/left-right-button/Asset_left_button@3x.png"));
     ui->nextFunButton->setFlat(true);
     ui->prevFunButton->setFlat(true);
+    //ui->textBrowser->setTextBackgroundColor();
 
+    //Prev and next integral buttons
+    ui->left->setEnabled(false);
+    ui->right->setEnabled(false);
 
 
     //Set MainWindow stylesheet
    this->setStyleSheet(   "QGroupBox::title { color: #9b9b9b;} QGroupBox{border:none;}"
-                          "QRadioButton{color: #ebebeb;}"
+                          "QRadioButton{color: rgb(37,37,37);}"
                           "QGraphicsView{background:transparent; border:none;}"
                           "QLineEdit{border:none; background-color: rgba(0, 0, 0, 0);}"
                       );
@@ -54,7 +61,6 @@ MainWindow::MainWindow(QWidget *parent)
     //Starter Radio button activated
     ui->averageButton->setChecked(true);
 
-
     //Initialize base parameters for integral
     ui->aLineEdit->setText("0");
     ui->bLineEdit->setText("1");
@@ -62,53 +68,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dLineEdit->setText("1");
 
     //Open file with past integrals
-    //fileIntegrals.setFileName("./res/PastIntegrals.txt");
+    fileIntegrals.setFileName("/Users/Horatio/source/Integral_3_ways-CourseWork/res/PastIntegrals.txt");
+    //fileIntegrals.open(QIODevice::ReadWrite);
 
+    //Setup for slider
     ui->step->setText("1");
-
     ui->horizontalSlider->setTickInterval(10);
     ui->horizontalSlider->setRange(0,4);
-
-
-
-    //Create first integral
-    //and initialize them by starter function
-    integrals.push_back(Integral());
-    integrals.back().setFunc(fpack.getCurrentFunc().getFunc());
-
-
-
-    //Testng....
-
-    QChart* chart = new QChart();
-    QLineSeries *series = new QLineSeries();
-    series->setPen(QPen(QColor().fromRgb(41,98,255)));
-    for (int i=-100;i<150; i++) series->append(i, i*i);
-    chart->addSeries(series);
-    chart->setTitle("QT Charts example");
-
-
-    QValueAxis *axisX = new QValueAxis;
-    axisX->setTickCount(10);
-    axisX->setTitleText("X");
-    chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
-
-    QValueAxis *axisY = new QValueAxis;
-    axisY->setLabelFormat("%i");
-    axisY->setTitleText("Y");
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-    //ui->graphicsView->setScene(chartView);
-    //ui->graphic->set;
-    chartView->setGeometry(200, 100, 200, 100);
-    chartView->show();
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -117,26 +83,33 @@ MainWindow::~MainWindow()
 }
 
 
-
-
 void MainWindow::on_equalButton_clicked()
 {
+    if(Integral::currentIdx != -1)
+    {
+        ui->left->setEnabled(true);
+    }
+
+    ui->right->setEnabled(false);
+    integrals.push_back(Integral());
+    Integral::currentIdx = integrals.size()-1;
+    ui->sizeOfVector->setNum(int(integrals.size()));
+
     integrals[Integral::currentIdx].setParameters(
                 ui->aLineEdit->text().toDouble(),
                 ui->bLineEdit->text().toDouble(),
                 ui->cLineEdit->text().toDouble(),
                 ui->dLineEdit->text().toDouble()
                 );
+    integrals[Integral::currentIdx].setMethod(method);
     integrals[Integral::currentIdx].setFunc(fpack.getCurrentFunc().getFunc());
     integrals[Integral::currentIdx].setIdxOfFunc(fpack.getCurrIdx());
     integrals[Integral::currentIdx].setStep(ui->step->text().toDouble());
+
     ui->label->setText(QString::number(integrals[Integral::currentIdx].execute(), 'd', 8));
 
-    drawAxis();
-    if(Integral::currentIdx == integrals.size() - 1)
-    {
-        integrals.push_back(Integral());
-    }
+    setIntegralsParametersToGUI();
+
 }
 
 void MainWindow::on_nextFunButton_clicked()
@@ -155,90 +128,254 @@ void MainWindow::on_prevFunButton_clicked()
 
 void MainWindow::on_averageButton_clicked()
 {
-    integrals.back().setMethod(METHOD::AVERAGE);
+    //integrals.back().setMethod(METHOD::AVERAGE);
+    method = METHOD::AVERAGE;
 }
 
 void MainWindow::on_simpsonButton_clicked()
 {
-    integrals.back().setMethod(METHOD::SIMPSON);
+    //integrals.back().setMethod(METHOD::SIMPSON);
+     method = METHOD::SIMPSON;
 }
 
 void MainWindow::on_newton_cotesButton_clicked()
 {
-    integrals.back().setMethod(METHOD::NEWTON_COTES);
+    //integrals.back().setMethod(METHOD::NEWTON_COTES);
+     method = METHOD::NEWTON_COTES;
 }
 
 void MainWindow::on_horizontalSlider_sliderMoved(int position)
 {
-    ui->step->setText(QString::number(1./pow(10.,position)));
-}
-
+    ui->step->setText(QString::number(1./pow(10.,position)));}
 
 void MainWindow::setIntegralsParametersToGUI()
 {
-    sceneForFunc->clear();
-    ui->aLineEdit->setText(QString::number(integrals[Integral::currentIdx].getA()));
-    ui->bLineEdit->setText(QString::number(integrals[Integral::currentIdx].getB()));
-    ui->cLineEdit->setText(QString::number(integrals[Integral::currentIdx].getC()));
-    ui->dLineEdit->setText(QString::number(integrals[Integral::currentIdx].getD()));
-    ui->step->setText(QString::number(integrals[Integral::currentIdx].getH()));
-    //ui->horizontalSlider->setTickPosition();
+    sceneForPrevFunc->clear();
 
-    if(Integral::currentIdx != integrals.size()-1)
-        ui->label->setNum(integrals[Integral::currentIdx].getRes());
-    else
-        ui->label->setNum(0);
+    ui->prevA->setText(QString::number(integrals[Integral::currentIdx].getA()));
+    ui->prevB->setText(QString::number(integrals[Integral::currentIdx].getB()));
+    ui->prevC->setText(QString::number(integrals[Integral::currentIdx].getC()));
+    ui->prevD->setText(QString::number(integrals[Integral::currentIdx].getD()));
+    ui->prevPrecision->setText(QString::number(integrals[Integral::currentIdx].getH()));
+    ui->qOfIter->setText(QString::number(integrals[Integral::currentIdx].getN()));
+
+
+    ui->currNum->setNum(Integral::currentIdx + 1);
+    ui->label->setNum(integrals[Integral::currentIdx].getRes());
+
+    sceneForPrevFunc->addPixmap(
+                QPixmap(fpack.getFuncByIdx(integrals[Integral::currentIdx].getIdxOfFunc()).getWhitePath().c_str()));
+
+    drawFunc();
 
     switch(integrals[Integral::currentIdx].getMethod())
     {
         case METHOD::AVERAGE:
-            ui->averageButton->setChecked(true);
+            ui->prevMeth->setText("Средних");
         break;
         case METHOD::SIMPSON:
-            ui->simpsonButton->setChecked(true);
+            ui->prevMeth->setText("Симпсона");
         break;
         case METHOD::NEWTON_COTES:
-            ui->newton_cotesButton->setChecked(true);
+            ui->prevMeth->setText("Ньютона-Котеса");
         break;
     }
-    fpack.setCurrFunc(integrals[Integral::currentIdx].getIdxOfFunc());
-    sceneForFunc->addPixmap(QPixmap(fpack.getCurrentFunc().getPath().c_str()));
 }
 
-void MainWindow::drawAxis()
+void MainWindow::setDefaultPrevGUI()
 {
-    int cx = Integral::cx;
-    int cy = Integral::cy;
+    sceneForPrevFunc->clear();
 
-    Integral::pen.setColor(QColor().fromRgb(81,81,81));
-    Integral::scene->addLine(cx, 0, cx, cy*2, Integral::pen);
-    Integral::scene->addLine(cx, 0, cx-4, 5, Integral::pen);
-    Integral::scene->addLine(cx, 0, cx+4, 5, Integral::pen);
+    ui->prevA->setText(QString::number(0));
+    ui->prevB->setText(QString::number(0));
+    ui->prevC->setText(QString::number(0));
+    ui->prevD->setText(QString::number(0));
+    ui->qOfIter->setText(QString::number(0));
+    ui->prevPrecision->setText(QString::number(0));
+    ui->qOfIter->setText(QString::number(0));
+    ui->prevMeth->setText("-");
 
-    Integral::scene->addLine(0, cy, cx*2, cy, Integral::pen);
-    Integral::scene->addLine(2*cx, cy, 2*cx-5, cy-4, Integral::pen);
-    Integral::scene->addLine(2*cx, cy, 2*cx-5, cy+4, Integral::pen);
-    Integral::pen = QPen(QColor().fromRgb(255,255,255));
+    ui->currNum->setNum(0);
+    ui->sizeOfVector->setNum(0);
+    ui->label->setNum(0);
+
+    graphic.removeSeries();
+    graphic.settleDownAxis();
+
 }
 
+void MainWindow::drawFunc()
+{
+    graphic.removeSeries();
+    integrals[Integral::currentIdx].constructSeries();
+    graphic.settleDownAxis();
+    graphic.addSeries(integrals[Integral::currentIdx].getSeries());
+}
 
 void MainWindow::on_left_clicked()
 {
     if(Integral::currentIdx != 0)
     {
         Integral::currentIdx--;
-        setIntegralsParametersToGUI();
+
     }
+    if(Integral::currentIdx == 0)
+    {
+        ui->left->setEnabled(false);
+    }else{
+        ui->left->setEnabled(true);
+    }
+    ui->right->setEnabled(true);
+    setIntegralsParametersToGUI();
 }
-
-
 
 void MainWindow::on_right_clicked()
 {
     if(Integral::currentIdx != integrals.size()-1)
     {
-        Integral::currentIdx++;
-        setIntegralsParametersToGUI();
+        Integral::currentIdx++;       
+    }
+    if(Integral::currentIdx == integrals.size()-1)
+    {
+        ui->right->setEnabled(false);
+    }else{
+        ui->right->setEnabled(true);
+    }
+    ui->left->setEnabled(true);
+    setIntegralsParametersToGUI();
+}
 
+void MainWindow::on_exitButton_clicked()
+{
+    fileIntegrals.close();
+    close();
+}
+
+void MainWindow::on_Clear_clicked()
+{
+    if(integrals.size() > 1)
+    {
+        integrals.erase(integrals.begin() + Integral::currentIdx);
+        if(Integral::currentIdx == integrals.size())
+        {
+            Integral::currentIdx--;
+        }
+        setIntegralsParametersToGUI();
+    }else
+    {
+        integrals.pop_back();
+        setDefaultPrevGUI();
+        setDefaultPrevGUI();
+        Integral::currentIdx = -1;
+    }
+    if(integrals.size() < 2)
+    {
+        ui->left->setEnabled(false);
+        ui->right->setEnabled(false);
+    }
+    ui->sizeOfVector->setNum(int(integrals.size()));
+}
+
+void MainWindow::on_ClearAll_clicked()
+{
+    integrals.clear();
+    ui->left->setEnabled(false);
+    ui->right->setEnabled(false);
+    setDefaultPrevGUI();
+    Integral::currentIdx = -1;
+    //integrals.push_back(Integral());
+    //ui->sizeOfVector->setNum(int(integrals.size()));
+    //setIntegralsParametersToGUI();
+}
+
+void MainWindow::on_SAVE_clicked()
+{
+    fileIntegrals.open(QIODevice::WriteOnly);
+    if(fileIntegrals.isOpen())
+    {
+        fileIntegrals.resize(0);
+        QTextStream stream(&fileIntegrals);
+        //stream << integrals.size() << endl;
+        foreach (auto integral, integrals)
+        {
+           stream << QString::number(integral.getA()) << ' ';
+           stream << QString::number(integral.getB()) << ' ';
+           stream << QString::number(integral.getC()) << ' ';
+           stream << QString::number(integral.getD()) << ' ';
+           stream << QString::number(integral.getH()) << ' ';
+           stream << QString::number(integral.getIdxOfFunc()) << ' ';
+           switch(integral.getMethod())
+           {
+            case METHOD::AVERAGE:
+               stream << QString::number(0);
+               break;
+           case METHOD::SIMPSON:
+              stream << QString::number(1);
+              break;
+           case METHOD::NEWTON_COTES:
+              stream << QString::number(2);
+              break;
+           }
+           stream << endl;
+        }
+        fileIntegrals.close();
+    }
+
+}
+
+void MainWindow::on_LOAD_clicked()
+{
+    fileIntegrals.open(QIODevice::ReadOnly);
+    if(fileIntegrals.isOpen())
+    {
+        QTextStream stream(&fileIntegrals);
+        integrals.clear();
+        double a;
+        double b;
+        double c;
+        double d;
+        double h;
+        short idxOfF;
+        int meth;
+
+        while(!stream.atEnd())
+        {
+            stream >> a >> b >> c >> d >> h >> idxOfF >> meth;
+            integrals.push_back(Integral());
+            integrals.back().setParameters(a, b, c, d);
+            integrals.back().setStep(h);
+            integrals.back().setIdxOfFunc(idxOfF);
+            switch(meth)
+            {
+                case 0:
+                integrals.back().setMethod(METHOD::AVERAGE);
+                break;
+                case 1:
+                integrals.back().setMethod(METHOD::SIMPSON);
+                break;
+                case 2:
+                integrals.back().setMethod(METHOD::NEWTON_COTES);
+                break;
+            }
+            integrals.back().setFunc(fpack.getFuncByIdx(idxOfF).getFunc());
+            integrals.back().execute();
+            stream.readLine();
+        }
+        if(integrals.size() > 0)
+        {
+            Integral::currentIdx = 0;
+            ui->left->setEnabled(false);
+            if(integrals.size() > 1)
+            {
+                ui->right->setEnabled(true);
+            }else
+            {
+                ui->right->setEnabled(false);
+            }
+            ui->sizeOfVector->setNum(int(integrals.size()));
+            setIntegralsParametersToGUI();
+        }
+
+        fileIntegrals.close();
     }
 }

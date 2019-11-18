@@ -10,18 +10,20 @@ using std::vector;
 class Function{
 public:
     Function(function<double(double)> func, string title):func(func),
-        path("C:/Users/Horatio/source/Integral_3_ways-CourseWork/img/Asset_" + title + "@3x.png"),
+        path("C:/Users/Horatio/source/Integral_3_ways-CourseWork/img/FunctionsBlack/Asset_" + title + "@2x.png"),
+        whitePath("C:/Users/Horatio/source/Integral_3_ways-CourseWork/img/FunctionsWhite/Asset_" + title + "@4x.png"),
         title(title){}
 
-   // decltype(auto) operator() (double arg) {return func(arg);}
+    decltype(auto) getFunc()        {return func;}
+    decltype(auto) getPath()        {return path;}
+    decltype(auto) getWhitePath()   {return whitePath;}
+    decltype(auto) getTitle()       {return title;}
 
-    decltype(auto) getFunc()    {return func;}
-    decltype(auto) getPath()    {return path;}
-    decltype(auto) getTitle()   {return title;}
 
 private:
     function<double(double)> func;
     string path;
+    string whitePath;
     string title;
 };
 
@@ -32,6 +34,7 @@ public:
     void next();
     void prev();
     Function getCurrentFunc();
+    Function getFuncByIdx(int idx)     const;
     decltype(auto) getCurrIdx() const {return currentFuncIdx;}
 
     void setCurrFunc(short currFunc) { currentFuncIdx = currFunc;}
